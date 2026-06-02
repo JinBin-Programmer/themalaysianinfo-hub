@@ -21,9 +21,9 @@ interface Tool {
 
 const TOOLS: Tool[] = [
   // ── Harga Terkini ──
-  { id: "petrol",  icon: "⛽", name: "Harga Petrol",       nameEn: "Petrol Price",        desc: "RON95, RON97 & Diesel dikemas kini setiap Khamis",       descEn: "RON95, RON97 & Diesel updated every Thursday",          url: "https://petrol.merquri.com",                    category: "prices",     badge: "TERKINI", badgeEn: "LIVE",  hot: true  },
+  { id: "petrol",  icon: "⛽", name: "Harga Petrol",       nameEn: "Petrol Price",        desc: "RON95, RON97 & Diesel dikemas kini setiap Khamis",       descEn: "RON95, RON97 & Diesel updated every Thursday",          url: "https://petrol.themalaysianinfo.online",                    category: "prices",     badge: "TERKINI", badgeEn: "LIVE",  hot: true  },
   { id: "gold",    icon: "🥇", name: "Harga Emas",         nameEn: "Gold Price",          desc: "Harga emas 916 & 999 terkini di Malaysia",               descEn: "Latest 916 & 999 gold price in Malaysia",               url: "https://goldprice-malaysia.com",                category: "prices",     hot: true  },
-  { id: "pepper",  icon: "🌶️", name: "Harga Lada",         nameEn: "Pepper Price",        desc: "Kadar harga lada hitam & putih semasa",                  descEn: "Current black & white pepper market prices",            url: "https://pepper.merquri.com",                    category: "prices"  },
+  { id: "pepper",  icon: "🌶️", name: "Harga Lada",         nameEn: "Pepper Price",        desc: "Kadar harga lada hitam & putih semasa",                  descEn: "Current black & white pepper market prices",            url: "https://pepper.themalaysianinfo.online",                    category: "prices"  },
 
   // ── Kewangan ──
   { id: "kwsp",    icon: "💰", name: "KWSP / EPF",         nameEn: "EPF Calculator",      desc: "Kira caruman KWSP majikan & pekerja",                    descEn: "Calculate employer & employee EPF contributions",        url: "https://kwsp.themalaysianinfo.online",          category: "finance",    hot: true  },
@@ -52,7 +52,7 @@ const TOOLS: Tool[] = [
 
   // ── Cuaca & Solat ──
   { id: "weather", icon: "🌤️", name: "Cuaca Hari Ini",    nameEn: "Today's Weather",     desc: "Ramalan cuaca terkini semua negeri Malaysia",            descEn: "Latest weather forecast for all Malaysian states",       url: "https://www.weather-jinbin.site",               category: "weather",  badge: "LANGSUNG", badgeEn: "LIVE" },
-  { id: "solat",   icon: "🌙", name: "Waktu Solat",        nameEn: "Prayer Times",        desc: "Jadual waktu solat harian seluruh Malaysia",             descEn: "Daily prayer times schedule across Malaysia",           url: "https://solat.merquri.com",                     category: "weather",  hot: true  },
+  { id: "solat",   icon: "🌙", name: "Waktu Solat",        nameEn: "Prayer Times",        desc: "Jadual waktu solat harian seluruh Malaysia",             descEn: "Daily prayer times schedule across Malaysia",           url: "https://solat.themalaysianinfo.online",                     category: "weather",  hot: true  },
 
   // ── Alatan ──
   { id: "tukaran", icon: "💱", name: "Tukaran Matawang",   nameEn: "Currency Exchange",   desc: "Kadar tukaran matawang ringgit terkini",                 descEn: "Latest Malaysian Ringgit exchange rates",               url: "https://tukaran.themalaysianinfo.online",       category: "tools"  },
