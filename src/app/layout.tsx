@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Malaysian Info — Portal Maklumat Malaysia",
   },
+  other: {
+    "google-adsense-account": "ca-pub-7019273666606982",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
