@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 
 type Lang = "bm" | "en";
@@ -17,47 +18,47 @@ interface Tool {
   badge?: string;
   badgeEn?: string;
   hot?: boolean;
+  /** true = internal route on this domain (uses Next Link, same tab) */
+  internal?: boolean;
 }
 
 const TOOLS: Tool[] = [
   // ── Harga Terkini ──
-  { id: "petrol",  icon: "⛽", name: "Harga Petrol",       nameEn: "Petrol Price",        desc: "RON95, RON97 & Diesel dikemas kini setiap Khamis",       descEn: "RON95, RON97 & Diesel updated every Thursday",          url: "https://petrol.themalaysianinfo.online",                    category: "prices",     badge: "TERKINI", badgeEn: "LIVE",  hot: true  },
-  { id: "gold",    icon: "🥇", name: "Harga Emas",         nameEn: "Gold Price",          desc: "Harga emas 916 & 999 terkini di Malaysia",               descEn: "Latest 916 & 999 gold price in Malaysia",               url: "https://goldprice-malaysia.com",                category: "prices",     hot: true  },
-  { id: "pepper",  icon: "🌶️", name: "Harga Lada",         nameEn: "Pepper Price",        desc: "Kadar harga lada hitam & putih semasa",                  descEn: "Current black & white pepper market prices",            url: "https://pepper.themalaysianinfo.online",                    category: "prices"  },
+  { id: "petrol",  icon: "⛽", name: "Harga Petrol",       nameEn: "Petrol Price",        desc: "RON95, RON97 & Diesel dikemas kini setiap Khamis",       descEn: "RON95, RON97 & Diesel updated every Thursday",          url: "/petrol",                    category: "prices",     badge: "TERKINI", badgeEn: "LIVE",  hot: true, internal: true  },
+  { id: "pepper",  icon: "🌶️", name: "Harga Lada",         nameEn: "Pepper Price",        desc: "Kadar harga lada hitam & putih semasa",                  descEn: "Current black & white pepper market prices",            url: "/pepper",                    category: "prices", internal: true  },
 
   // ── Kewangan ──
-  { id: "kwsp",    icon: "💰", name: "KWSP / EPF",         nameEn: "EPF Calculator",      desc: "Kira caruman KWSP majikan & pekerja",                    descEn: "Calculate employer & employee EPF contributions",        url: "https://kwsp.themalaysianinfo.online",          category: "finance",    hot: true  },
-  { id: "gaji",    icon: "💵", name: "Gaji Bersih",        nameEn: "Net Salary",          desc: "Kira gaji bersih selepas EPF, SOCSO & PCB",              descEn: "Calculate take-home pay after EPF, SOCSO & PCB",        url: "https://gaji.themalaysianinfo.online",          category: "finance"  },
-  { id: "cukai",   icon: "🧾", name: "Cukai Pendapatan",   nameEn: "Income Tax",          desc: "Kalkulator cukai pendapatan individu Malaysia",           descEn: "Malaysia individual income tax calculator",              url: "https://cukai.themalaysianinfo.online",         category: "finance"  },
-  { id: "cukaijalan",icon:"🚗",name: "Cukai Jalan",        nameEn: "Road Tax",            desc: "Kira cukai jalan kenderaan berdasarkan cc enjin",        descEn: "Calculate vehicle road tax by engine cc",               url: "https://cukaijalan.themalaysianinfo.online",    category: "finance"  },
-  { id: "zakat",   icon: "🕌", name: "Kira Zakat",         nameEn: "Zakat Calculator",    desc: "Kalkulator zakat pendapatan, simpanan & emas",           descEn: "Income, savings & gold zakat calculator",               url: "https://zakat.themalaysianinfo.online",         category: "finance"  },
-  { id: "ptptn",   icon: "🎓", name: "Pinjaman PTPTN",     nameEn: "PTPTN Loan",          desc: "Kira jadual bayaran balik pinjaman PTPTN anda",          descEn: "Calculate your PTPTN loan repayment schedule",          url: "https://ptptn.themalaysianinfo.online",         category: "finance",    badge: "2025", badgeEn: "2025" },
-  { id: "rumah",   icon: "🏠", name: "Pinjaman Rumah",     nameEn: "Home Loan",           desc: "Kalkulator pinjaman perumahan & ansuran bulanan",        descEn: "Housing loan & monthly instalment calculator",          url: "https://rumah.themalaysianinfo.online",         category: "finance"  },
-  { id: "simpanan",icon: "🏦", name: "Kira Simpanan",      nameEn: "Savings Calculator",  desc: "Projeksikan pertumbuhan simpanan masa depan anda",       descEn: "Project your future savings growth",                    url: "https://simpanan.themalaysianinfo.online",      category: "finance"  },
-  { id: "ot",      icon: "⏰", name: "Kira Overtime",      nameEn: "OT Calculator",       desc: "Kira bayaran kerja lebih masa mengikut akta",            descEn: "Calculate overtime pay per Malaysian labour law",        url: "https://ot.themalaysianinfo.online",            category: "finance"  },
-  { id: "pinjaman",icon: "📊", name: "Kalkulator Pinjaman",nameEn: "Loan Calculator",     desc: "Kira bayaran bulanan & jumlah faedah pinjaman",          descEn: "Calculate monthly payments & total interest",           url: "https://pinjaman.themalaysianinfo.online",      category: "finance"  },
+  { id: "kwsp",    icon: "💰", name: "KWSP / EPF",         nameEn: "EPF Calculator",      desc: "Kira caruman KWSP majikan & pekerja",                    descEn: "Calculate employer & employee EPF contributions",        url: "/kwsp",          category: "finance",    hot: true, internal: true  },
+  { id: "gaji",    icon: "💵", name: "Gaji Bersih",        nameEn: "Net Salary",          desc: "Kira gaji bersih selepas EPF, SOCSO & PCB",              descEn: "Calculate take-home pay after EPF, SOCSO & PCB",        url: "/gaji-bersih",          category: "finance", internal: true  },
+  { id: "cukai",   icon: "🧾", name: "Cukai Pendapatan",   nameEn: "Income Tax",          desc: "Kalkulator cukai pendapatan individu Malaysia",           descEn: "Malaysia individual income tax calculator",              url: "/cukai-pendapatan",         category: "finance", internal: true  },
+  { id: "cukaijalan",icon:"🚗",name: "Cukai Jalan",        nameEn: "Road Tax",            desc: "Kira cukai jalan kenderaan berdasarkan cc enjin",        descEn: "Calculate vehicle road tax by engine cc",               url: "/cukai-jalan",    category: "finance", internal: true  },
+  { id: "zakat",   icon: "🕌", name: "Kira Zakat",         nameEn: "Zakat Calculator",    desc: "Kalkulator zakat pendapatan, simpanan & emas",           descEn: "Income, savings & gold zakat calculator",               url: "/zakat",         category: "finance", internal: true  },
+  { id: "ptptn",   icon: "🎓", name: "Pinjaman PTPTN",     nameEn: "PTPTN Loan",          desc: "Kira jadual bayaran balik pinjaman PTPTN anda",          descEn: "Calculate your PTPTN loan repayment schedule",          url: "/ptptn",         category: "finance",    badge: "2025", badgeEn: "2025", internal: true },
+  { id: "rumah",   icon: "🏠", name: "Pinjaman Rumah",     nameEn: "Home Loan",           desc: "Kalkulator pinjaman perumahan & ansuran bulanan",        descEn: "Housing loan & monthly instalment calculator",          url: "/pinjaman-rumah",         category: "finance", internal: true  },
+  { id: "simpanan",icon: "🏦", name: "Kira Simpanan",      nameEn: "Savings Calculator",  desc: "Projeksikan pertumbuhan simpanan masa depan anda",       descEn: "Project your future savings growth",                    url: "/simpanan",      category: "finance", internal: true  },
+  { id: "ot",      icon: "⏰", name: "Kira Overtime",      nameEn: "OT Calculator",       desc: "Kira bayaran kerja lebih masa mengikut akta",            descEn: "Calculate overtime pay per Malaysian labour law",        url: "/ot",            category: "finance", internal: true  },
+  { id: "pinjaman",icon: "📊", name: "Kalkulator Pinjaman",nameEn: "Loan Calculator",     desc: "Kira bayaran bulanan & jumlah faedah pinjaman",          descEn: "Calculate monthly payments & total interest",           url: "/pinjaman",      category: "finance", internal: true  },
 
   // ── Kalkulator ──
-  { id: "bmi",     icon: "⚖️", name: "Kira BMI",           nameEn: "BMI Calculator",      desc: "Semak indeks jisim badan & tafsiran berat badan",        descEn: "Check your body mass index & weight status",            url: "https://bmi.themalaysianinfo.online",           category: "calculator" },
-  { id: "umur",    icon: "🎂", name: "Kira Umur",          nameEn: "Age Calculator",      desc: "Kira umur tepat dalam tahun, bulan & hari",             descEn: "Calculate exact age in years, months & days",           url: "https://umur.themalaysianinfo.online",          category: "calculator" },
-  { id: "diskaun", icon: "🏷️", name: "Kira Diskaun",       nameEn: "Discount Calculator", desc: "Kira harga akhir & penjimatan selepas diskaun",          descEn: "Calculate final price & savings after discount",        url: "https://diskaun.themalaysianinfo.online",       category: "calculator" },
-  { id: "bil",     icon: "🧮", name: "Kira Bil",           nameEn: "Bill Calculator",     desc: "Anggaran bil TNB & utiliti rumah anda",                  descEn: "Estimate your TNB electricity & utility bills",         url: "https://kirabill.themalaysianinfo.online",      category: "calculator" },
+  { id: "bmi",     icon: "⚖️", name: "Kira BMI",           nameEn: "BMI Calculator",      desc: "Semak indeks jisim badan & tafsiran berat badan",        descEn: "Check your body mass index & weight status",            url: "/bmi",           category: "calculator", internal: true },
+  { id: "umur",    icon: "🎂", name: "Kira Umur",          nameEn: "Age Calculator",      desc: "Kira umur tepat dalam tahun, bulan & hari",             descEn: "Calculate exact age in years, months & days",           url: "/umur",          category: "calculator", internal: true },
+  { id: "diskaun", icon: "🏷️", name: "Kira Diskaun",       nameEn: "Discount Calculator", desc: "Kira harga akhir & penjimatan selepas diskaun",          descEn: "Calculate final price & savings after discount",        url: "/diskaun",       category: "calculator", internal: true },
+  { id: "bil",     icon: "🧮", name: "Kira Bil",           nameEn: "Bill Calculator",     desc: "Anggaran bil TNB & utiliti rumah anda",                  descEn: "Estimate your TNB electricity & utility bills",         url: "/bil",      category: "calculator", internal: true },
 
   // ── Semakan ──
-  { id: "plat",    icon: "🚘", name: "Nombor Plat",        nameEn: "Car Plate",           desc: "Semak negeri & kawasan nombor plat kenderaan",           descEn: "Check state & area of a vehicle plate number",          url: "https://plat.themalaysianinfo.online",          category: "lookup"  },
-  { id: "poskod",  icon: "📮", name: "Semak Poskod",       nameEn: "Postcode Lookup",     desc: "Cari poskod sebarang kawasan di seluruh Malaysia",       descEn: "Find postcode for any area across Malaysia",            url: "https://poskod.themalaysianinfo.online",        category: "lookup"  },
-  { id: "ic",      icon: "🪪", name: "Semak IC",           nameEn: "IC Checker",          desc: "Semak tarikh lahir, negeri & jantina dari nombor IC",    descEn: "Check birthdate, state & gender from IC number",        url: "https://ic.themalaysianinfo.online",            category: "lookup"  },
-  { id: "cuti",    icon: "📅", name: "Cuti Umum",          nameEn: "Public Holidays",     desc: "Kalendar cuti umum Malaysia 2025 mengikut negeri",       descEn: "Malaysia 2025 public holidays calendar by state",       url: "https://cuti.themalaysianinfo.online",          category: "lookup",   badge: "2025", badgeEn: "2025" },
-  { id: "4d",      icon: "🎰", name: "Keputusan 4D",       nameEn: "4D Results",          desc: "Semak keputusan loteri 4D Magnum, Toto & Damacai",      descEn: "Check Magnum, Toto & Damacai 4D lottery results",       url: "https://4d.themalaysianinfo.online",            category: "lookup",   hot: true  },
+  { id: "plat",    icon: "🚘", name: "Nombor Plat",        nameEn: "Car Plate",           desc: "Semak negeri & kawasan nombor plat kenderaan",           descEn: "Check state & area of a vehicle plate number",          url: "/nombor-plat",          category: "lookup", internal: true  },
+  { id: "poskod",  icon: "📮", name: "Semak Poskod",       nameEn: "Postcode Lookup",     desc: "Cari poskod sebarang kawasan di seluruh Malaysia",       descEn: "Find postcode for any area across Malaysia",            url: "/poskod",        category: "lookup", internal: true  },
+  { id: "ic",      icon: "🪪", name: "Semak IC",           nameEn: "IC Checker",          desc: "Semak tarikh lahir, negeri & jantina dari nombor IC",    descEn: "Check birthdate, state & gender from IC number",        url: "/semak-ic",            category: "lookup", internal: true  },
+  { id: "cuti",    icon: "📅", name: "Cuti Umum",          nameEn: "Public Holidays",     desc: "Kalendar cuti umum Malaysia mengikut negeri",            descEn: "Malaysia public holidays calendar by state",            url: "/cuti-umum",          category: "lookup",   badge: "2026", badgeEn: "2026", internal: true },
+  { id: "4d",      icon: "🎰", name: "Keputusan 4D",       nameEn: "4D Results",          desc: "Semak keputusan loteri 4D Magnum, Toto & Damacai",      descEn: "Check Magnum, Toto & Damacai 4D lottery results",       url: "/4d",            category: "lookup",   hot: true, internal: true  },
 
-  // ── Cuaca & Solat ──
-  { id: "weather", icon: "🌤️", name: "Cuaca Hari Ini",    nameEn: "Today's Weather",     desc: "Ramalan cuaca terkini semua negeri Malaysia",            descEn: "Latest weather forecast for all Malaysian states",       url: "https://www.weather-jinbin.site",               category: "weather",  badge: "LANGSUNG", badgeEn: "LIVE" },
-  { id: "solat",   icon: "🌙", name: "Waktu Solat",        nameEn: "Prayer Times",        desc: "Jadual waktu solat harian seluruh Malaysia",             descEn: "Daily prayer times schedule across Malaysia",           url: "https://solat.themalaysianinfo.online",                     category: "weather",  hot: true  },
+  // ── Solat ──
+  { id: "solat",   icon: "🌙", name: "Waktu Solat",        nameEn: "Prayer Times",        desc: "Jadual waktu solat harian seluruh Malaysia",             descEn: "Daily prayer times schedule across Malaysia",           url: "/solat",                     category: "weather",  hot: true, internal: true  },
 
   // ── Alatan ──
-  { id: "tukaran", icon: "💱", name: "Tukaran Matawang",   nameEn: "Currency Exchange",   desc: "Kadar tukaran matawang ringgit terkini",                 descEn: "Latest Malaysian Ringgit exchange rates",               url: "https://tukaran.themalaysianinfo.online",       category: "tools"  },
-  { id: "konversi",icon: "📐", name: "Konversi Unit",      nameEn: "Unit Converter",      desc: "Tukar unit panjang, jisim, suhu, luas & lain-lain",     descEn: "Convert length, mass, temperature, area & more",        url: "https://konversi.themalaysianinfo.online",      category: "tools"  },
-  { id: "tukar",   icon: "📁", name: "Tukar Fail",         nameEn: "File Converter",      desc: "Tukar format fail PDF, gambar & dokumen dalam talian",   descEn: "Convert PDF, image & document file formats online",     url: "https://tukar.themalaysianinfo.online",         category: "tools"  },
+  { id: "tukaran", icon: "💱", name: "Tukaran Matawang",   nameEn: "Currency Exchange",   desc: "Kadar tukaran matawang ringgit terkini",                 descEn: "Latest Malaysian Ringgit exchange rates",               url: "/tukaran",       category: "tools", internal: true  },
+  { id: "konversi",icon: "📐", name: "Konversi Unit",      nameEn: "Unit Converter",      desc: "Tukar unit panjang, jisim, suhu, luas & lain-lain",     descEn: "Convert length, mass, temperature, area & more",        url: "/konversi",      category: "tools", internal: true  },
+  { id: "tukar",   icon: "📁", name: "Tukar Fail",         nameEn: "File Converter",      desc: "Tukar format fail PDF, gambar & dokumen dalam talian",   descEn: "Convert PDF, image & document file formats online",     url: "/tukar-fail",         category: "tools", internal: true  },
 ];
 
 interface Category {
@@ -74,7 +75,7 @@ const CATEGORIES: Category[] = [
   { id: "finance",    label: "Kewangan",      labelEn: "Finance",          icon: "💰", activeColor: "text-emerald-400" },
   { id: "calculator", label: "Kalkulator",    labelEn: "Calculators",      icon: "🧮", activeColor: "text-blue-400" },
   { id: "lookup",     label: "Semakan",       labelEn: "Lookup",           icon: "🔍", activeColor: "text-purple-400" },
-  { id: "weather",    label: "Cuaca & Solat", labelEn: "Weather & Prayer", icon: "🌤️", activeColor: "text-sky-400" },
+  { id: "weather",    label: "Solat",         labelEn: "Prayer Times",     icon: "🌙", activeColor: "text-sky-400" },
   { id: "tools",      label: "Alatan",        labelEn: "Tools",            icon: "🔧", activeColor: "text-slate-400" },
 ];
 
@@ -127,13 +128,10 @@ function ToolCard({ tool, lang, isFav, onToggleFav }: {
   const desc  = lang === "bm" ? tool.desc   : tool.descEn;
   const badge = lang === "bm" ? tool.badge  : tool.badgeEn;
 
-  return (
-    <a
-      href={tool.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`tool-card group relative flex flex-col gap-3 bg-gradient-to-br ${s.gradient} border ${s.border} ${s.hoverBorder} rounded-2xl p-5 cursor-pointer`}
-    >
+  const cardClass = `tool-card group relative flex flex-col gap-3 bg-gradient-to-br ${s.gradient} border ${s.border} ${s.hoverBorder} rounded-2xl p-5 cursor-pointer`;
+
+  const inner = (
+    <>
       {/* Icon row */}
       <div className="flex items-start justify-between">
         <div className="relative">
@@ -173,6 +171,20 @@ function ToolCard({ tool, lang, isFav, onToggleFav }: {
         </span>
         <span className="text-white/25 group-hover:text-white/60 transition-colors duration-200 text-base font-light">→</span>
       </div>
+    </>
+  );
+
+  if (tool.internal) {
+    return (
+      <Link href={tool.url} className={cardClass}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={tool.url} target="_blank" rel="noopener noreferrer" className={cardClass}>
+      {inner}
     </a>
   );
 }
@@ -281,8 +293,8 @@ export default function HubContent() {
 
   const waText = encodeURIComponent(
     lang === "bm"
-      ? "🇲🇾 The Malaysian Info — 27 alatan percuma untuk rakyat Malaysia!\n\nHarga petrol, KWSP, cukai, waktu solat dan lebih lagi:\nhttps://www.themalaysianinfo.online"
-      : "🇲🇾 The Malaysian Info — 27 free tools for Malaysians!\n\nPetrol prices, EPF, taxes, prayer times and more:\nhttps://www.themalaysianinfo.online"
+      ? `🇲🇾 The Malaysian Info — ${TOOLS.length} alatan percuma untuk rakyat Malaysia!\n\nHarga petrol, KWSP, cukai, waktu solat dan lebih lagi:\nhttps://www.themalaysianinfo.online`
+      : `🇲🇾 The Malaysian Info — ${TOOLS.length} free tools for Malaysians!\n\nPetrol prices, EPF, taxes, prayer times and more:\nhttps://www.themalaysianinfo.online`
   );
 
   return (
@@ -494,7 +506,7 @@ export default function HubContent() {
               }
             </p>
             <div className="flex flex-wrap justify-center gap-2 pt-1">
-              {["⛽ Petrol","🥇 Emas","💰 KWSP","🌙 Solat","🧾 Cukai","🚗 Road Tax"].map(tag => (
+              {["⛽ Petrol","🌶️ Lada","💰 KWSP","🌙 Solat","🧾 Cukai","🚗 Road Tax"].map(tag => (
                 <span key={tag} className="text-xs bg-white/8 border border-white/12 text-white/50 px-3 py-1.5 rounded-full">{tag}</span>
               ))}
             </div>

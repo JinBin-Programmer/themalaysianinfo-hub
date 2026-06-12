@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.themalaysianinfo.online"),
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s — The Malaysian Info",
   },
   description:
-    "Portal maklumat Malaysia terlengkap — harga petrol, harga emas, waktu solat, kalkulator KWSP, cukai pendapatan, pinjaman rumah dan 27 alatan percuma. Malaysia's #1 free information hub.",
+    "Portal maklumat Malaysia terlengkap — harga petrol, waktu solat, kalkulator KWSP, cukai pendapatan, pinjaman rumah dan banyak alatan percuma. Malaysia's #1 free information hub.",
   keywords: [
     "portal maklumat malaysia",
     "malaysia information hub",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     locale: "ms_MY",
     siteName: "The Malaysian Info",
     title: "The Malaysian Info — Portal Maklumat Malaysia",
-    description: "27 alatan percuma untuk rakyat Malaysia — harga, kalkulator, semakan, cuaca dan lebih lagi.",
+    description: "Alatan percuma untuk rakyat Malaysia — harga, kalkulator, semakan dan lebih lagi.",
   },
   twitter: {
     card: "summary_large_image",
@@ -72,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "name": "The Malaysian Info",
             "alternateName": "Portal Maklumat Malaysia",
             "url": "https://www.themalaysianinfo.online",
-            "description": "Portal maklumat Malaysia terlengkap — 27 alatan percuma untuk rakyat Malaysia",
+            "description": "Portal maklumat Malaysia terlengkap — alatan percuma untuk rakyat Malaysia",
             "inLanguage": ["ms", "en"],
             "potentialAction": {
               "@type": "SearchAction",
@@ -86,9 +87,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#0a0a0a]">
-        <main className="flex-1">
-          {children}
-        </main>
+        <LanguageProvider>
+          <main className="flex-1">
+            {children}
+          </main>
+        </LanguageProvider>
       </body>
     </html>
   );
