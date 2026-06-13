@@ -50,6 +50,7 @@ const TOOLS: Tool[] = [
   { id: "poskod",  icon: "📮", name: "Semak Poskod",       nameEn: "Postcode Lookup",     desc: "Cari poskod sebarang kawasan di seluruh Malaysia",       descEn: "Find postcode for any area across Malaysia",            url: "/poskod",        category: "lookup", internal: true  },
   { id: "ic",      icon: "🪪", name: "Semak IC",           nameEn: "IC Checker",          desc: "Semak tarikh lahir, negeri & jantina dari nombor IC",    descEn: "Check birthdate, state & gender from IC number",        url: "/semak-ic",            category: "lookup", internal: true  },
   { id: "cuti",    icon: "📅", name: "Cuti Umum",          nameEn: "Public Holidays",     desc: "Kalendar cuti umum Malaysia mengikut negeri",            descEn: "Malaysia public holidays calendar by state",            url: "/cuti-umum",          category: "lookup",   badge: "2026", badgeEn: "2026", internal: true },
+  { id: "pru",     icon: "🗳️", name: "Pilihan Raya",       nameEn: "Elections",           desc: "Keputusan PRU15 & kerajaan setiap negeri — peta interaktif", descEn: "GE15 results & each state's government — interactive map", url: "/pilihanraya",        category: "lookup",   badge: "PRU15", badgeEn: "GE15", hot: true, internal: true },
   { id: "4d",      icon: "🎰", name: "Keputusan 4D",       nameEn: "4D Results",          desc: "Semak keputusan loteri 4D Magnum, Toto & Damacai",      descEn: "Check Magnum, Toto & Damacai 4D lottery results",       url: "/4d",            category: "lookup",   hot: true, internal: true  },
 
   // ── Solat ──

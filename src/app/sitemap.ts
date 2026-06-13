@@ -9,7 +9,7 @@ const ROUTES = [
   "kwsp", "gaji-bersih", "cukai-pendapatan", "cukai-jalan", "zakat",
   "ptptn", "pinjaman-rumah", "simpanan", "ot", "pinjaman",
   "bmi", "umur", "diskaun", "bil",
-  "nombor-plat", "poskod", "semak-ic", "cuti-umum", "4d",
+  "nombor-plat", "poskod", "semak-ic", "cuti-umum", "4d", "pilihanraya",
   "solat",
   "tukaran", "konversi", "tukar-fail",
   "about", "contact", "privacy-policy", "terms",
