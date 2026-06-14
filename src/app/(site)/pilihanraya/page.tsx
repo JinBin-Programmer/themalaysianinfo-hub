@@ -3,18 +3,20 @@ import ElectionContent from "./_components/ElectionContent";
 import { ELECTION_FAQ } from "./_lib/faq";
 
 export const metadata: Metadata = {
-  title: "Pilihan Raya Malaysia — Keputusan PRU15 & Kerajaan Setiap Negeri",
+  title: "Pilihan Raya Malaysia — PRN Johor & N. Sembilan 2026, Keputusan PRU15",
   description:
-    "Keputusan Pilihan Raya Umum ke-15 (PRU15 2022) dan kerajaan terkini setiap negeri Malaysia — peta interaktif, Menteri Besar/Ketua Menteri, parti & keputusan DUN mengikut negeri.",
+    "PRN Johor (11 Julai) & Negeri Sembilan (1 Ogos 2026) — tarikh penting, kira detik & kerusi. Plus keputusan PRU15 2022 dan kerajaan setiap negeri: peta interaktif, Menteri Besar & pemenang setiap kawasan.",
   keywords: [
+    "prn johor 2026",
+    "prn negeri sembilan 2026",
+    "tarikh prn johor",
+    "pilihan raya johor 2026",
     "pilihan raya malaysia",
     "keputusan pru15",
     "ge15 results malaysia",
-    "pru15 2022",
     "keputusan pilihan raya negeri",
     "menteri besar setiap negeri",
     "malaysia election results by state",
-    "kerajaan negeri malaysia",
     "peta pilihan raya malaysia",
     "prn sabah 2025",
   ],
@@ -22,9 +24,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ms_MY",
-    title: "Pilihan Raya Malaysia — Keputusan PRU15 & Kerajaan Setiap Negeri",
+    title: "PRN Johor & N. Sembilan 2026 + Keputusan Pilihan Raya Malaysia",
     description:
-      "Peta interaktif keputusan pilihan raya Malaysia — PRU15 2022 & kerajaan terkini setiap negeri dengan Menteri Besar/Ketua Menteri dan keputusan DUN.",
+      "Kira detik PRN Johor (11 Julai) & Negeri Sembilan (1 Ogos 2026), tarikh penting, peta interaktif kerajaan negeri & pemenang setiap kerusi PRU15.",
   },
 };
 

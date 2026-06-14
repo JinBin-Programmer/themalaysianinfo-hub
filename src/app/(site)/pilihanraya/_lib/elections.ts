@@ -215,8 +215,8 @@ export const STATES: StateInfo[] = [
       { label: "PN", seats: 5, color: COLORS.PN },
     ],
     federalSeats: 8,
-    statusBm: "Pembubaran DUN diumumkan 4 Jun 2026 tetapi dipertikai oleh Undang negeri. Keputusan di bawah ialah PRN 2023 (terakhir selesai).",
-    statusEn: "Assembly dissolution announced 4 Jun 2026 but disputed by the state's Undang (ruling chiefs). Results below are the last completed election (2023).",
+    statusBm: "PRN ke-16 akan datang — penamaan calon 18 Julai, mengundi 1 Ogos 2026. Kerajaan sementara di bawah Aminuddin Harun (PH). Keputusan di bawah ialah PRN 2023 (terakhir selesai).",
+    statusEn: "16th state election upcoming — nomination 18 July, polling 1 August 2026. Caretaker government under Aminuddin Harun (PH). Results below are the last completed election (2023).",
     x: 72, y: 254, w: 62, h: 44,
   },
   {
@@ -250,8 +250,8 @@ export const STATES: StateInfo[] = [
     federalSeats: 26,
     noteBm: "BN menang besar dengan majoriti dua pertiga (40/56 kerusi).",
     noteEn: "BN won a two-thirds majority (40/56 seats).",
-    statusBm: "DUN dibubarkan 1 Jun 2026 — PRN dijangka sebelum 29 Julai 2026. Kerajaan sementara di bawah Onn Hafiz. Keputusan di bawah ialah PRN 2022 (terakhir selesai).",
-    statusEn: "Assembly dissolved 1 Jun 2026 — state election due before 29 July 2026. Caretaker government under Onn Hafiz. Results below are the last completed election (2022).",
+    statusBm: "PRN ke-16 akan datang — penamaan calon 27 Jun, mengundi 11 Julai 2026. Kerajaan sementara di bawah Onn Hafiz (BN). Keputusan di bawah ialah PRN 2022 (terakhir selesai).",
+    statusEn: "16th state election upcoming — nomination 27 Jun, polling 11 July 2026. Caretaker government under Onn Hafiz (BN). Results below are the last completed election (2022).",
     x: 130, y: 274, w: 120, h: 82,
   },
   {

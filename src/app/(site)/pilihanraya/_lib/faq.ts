@@ -7,6 +7,12 @@ export interface FaqItem {
 
 export const ELECTION_FAQ: FaqItem[] = [
   {
+    q: "Bilakah PRN Johor dan Negeri Sembilan 2026?",
+    qEn: "When are the Johor and Negeri Sembilan 2026 state elections?",
+    a: "Suruhanjaya Pilihan Raya (SPR) menetapkan Pilihan Raya Negeri (PRN) Johor ke-16 pada 11 Julai 2026, dengan penamaan calon pada 27 Jun dan pengundian awal pada 7 Julai. PRN Negeri Sembilan ke-16 pula pada 1 Ogos 2026, dengan penamaan calon pada 18 Julai dan pengundian awal pada 28 Julai. Johor mempertaruhkan 56 kerusi DUN manakala Negeri Sembilan 36 kerusi. Lihat kira detik dan tarikh penting di bahagian atas halaman ini.",
+    aEn: "The Election Commission (SPR) set the 16th Johor state election for 11 July 2026, with nomination day on 27 June and early voting on 7 July. The 16th Negeri Sembilan state election follows on 1 August 2026, with nomination on 18 July and early voting on 28 July. Johor contests 56 assembly seats and Negeri Sembilan 36. See the countdown and key dates at the top of this page.",
+  },
+  {
     q: "Bilakah pilihan raya umum terakhir Malaysia diadakan?",
     qEn: "When was Malaysia's last general election?",
     a: "Pilihan Raya Umum ke-15 (PRU15) diadakan pada 19 November 2022, membabitkan 222 kerusi Parlimen (Dewan Rakyat). Pakatan Harapan memenangi kerusi terbanyak (82), tetapi tiada gabungan mencapai majoriti mudah 112 kerusi, menghasilkan Parlimen tergantung pertama dalam sejarah negara. Anwar Ibrahim dilantik sebagai Perdana Menteri ke-10 pada 24 November 2022 melalui kerajaan perpaduan.",

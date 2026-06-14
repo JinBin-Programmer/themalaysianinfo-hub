@@ -3,6 +3,7 @@
 import { useState } from "react";
 import MalaysiaMap from "./MalaysiaMap";
 import SeatList from "./SeatList";
+import UpcomingElection from "./UpcomingElection";
 import ElectionArticle from "./ElectionArticle";
 import AdBanner from "@/components/AdBanner";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -215,6 +216,9 @@ export default function ElectionContent() {
       {/* Body */}
       <div className="max-w-3xl mx-auto px-4 py-10 space-y-8 bg-[#0a0a0a]">
 
+        {/* Upcoming elections (Johor 11 Jul, N. Sembilan 1 Aug 2026) */}
+        <UpcomingElection onSelectState={setSelectedId} />
+
         {/* Key people */}
         <section className="animate-in space-y-3">
           <h2 className="text-lg font-bold text-white">{tx.peopleTitle}</h2>
@@ -235,7 +239,7 @@ export default function ElectionContent() {
         <AdBanner slot="8888888888" format="horizontal" className="min-h-[90px] rounded-xl overflow-hidden" />
 
         {/* Interactive map + panel */}
-        <section className="space-y-4">
+        <section className="space-y-4" id="state-map">
           <div>
             <h2 className="text-lg font-bold text-white">{tx.mapTitle}</h2>
             <p className="text-white/45 text-xs">{tx.mapHint}</p>

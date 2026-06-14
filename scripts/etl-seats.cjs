@@ -81,6 +81,11 @@ const num = (s) => { const n = parseInt(String(s).replace(/[^\d-]/g, ""), 10); r
 const cleanCode = (s) => s.replace(/\s+/g, ""); // "N. 01" -> "N.01", "P. 167" -> "P.167"
 const splitParl = (s) => { const m = s.match(/^(\S+)\s+(.*)$/); return m ? [cleanCode(m[1]), m[2].trim()] : [cleanCode(s), ""]; };
 
+// States whose DUN result has been superseded by a newer election loaded below.
+// On election night, add "negeri" here (its 2023 result lives in prn15) before
+// loading the 2026 Negeri Sembilan results, so the old result is not used.
+const SUPERSEDED = new Set([/* "negeri" */]);
+
 // ---- accumulators ----
 const SEATS = {}; // id -> { parlimen:[], dun:[] }
 const ensure = (id) => (SEATS[id] ||= { parlimen: [], dun: [] });
@@ -119,7 +124,7 @@ async function dun2023() {
   for (const [k, arr] of Object.entries(groups)) {
     arr.sort((a, b) => num(b.votes) - num(a.votes));
     const win = arr.find(r => (r.result || "").toLowerCase() === "won") || arr[0];
-    const id = STATE_ID(win.state); if (!id) continue;
+    const id = STATE_ID(win.state); if (!id || SUPERSEDED.has(id)) continue;
     const second = arr.find(r => r !== win);
     const maj = second ? (num(win.votes) - num(second.votes)) : null;
     const [code, name] = splitParl(win.dun);
@@ -218,6 +223,28 @@ async function dunWinners(winUrl, resUrl, cols) {
     TDK + "/2025-SABAH-STATE-ELECTIONS/SABAH_2025_WINNING_CANDIDATES.csv",
     TDK + "/2025-SABAH-STATE-ELECTIONS/2025_SABAH_DUN_RESULTS.csv",
     { codeCol: "STATE CONSTITUENCY CODE", nameCol: "STATE CONSTITUENCY NAME" });
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // ELECTION NIGHT 2026 — uncomment when SPR / TindakMalaysia publish results.
+  // Verify the exact filenames in the repo folder first, then:
+  //   1) COMMENT OUT the Johor 2022 block above, and uncomment Johor 2026 below.
+  //   2) Add "negeri" to SUPERSEDED (top of file), then uncomment N. Sembilan 2026.
+  //   3) Re-run:  node scripts/etl-seats.cjs   and verify counts (Johor 56, N9 36).
+  //   4) In _lib/upcoming.ts set resultsReady:true; in _lib/elections.ts update the
+  //      state's electionBm/En, results[] tally, gov, leaderName + leaderSince.
+  //
+  // Johor PRN16 (polling 11 Jul 2026):
+  // await dunWinners(
+  //   TDK + "/2026-JOHOR-STATE-ELECTIONS/JOHOR_2026_DUN_WINNING_CANDIDATES.csv",
+  //   TDK + "/2026-JOHOR-STATE-ELECTIONS/JOHOR_2026_ELECTION_RESULTS.csv",
+  //   { codeCol: "STATE CONSTITUENCY CODE", nameCol: "STATE CONSTITUENCY NAME" });
+  //
+  // Negeri Sembilan PRN16 (polling 1 Aug 2026):
+  // await dunWinners(
+  //   TDK + "/2026-NEGERI-SEMBILAN-STATE-ELECTIONS/NEGERI_SEMBILAN_2026_DUN_WINNING_CANDIDATES.csv",
+  //   TDK + "/2026-NEGERI-SEMBILAN-STATE-ELECTIONS/NEGERI_SEMBILAN_2026_ELECTION_RESULTS.csv",
+  //   { codeCol: "STATE CONSTITUENCY CODE", nameCol: "STATE CONSTITUENCY NAME" });
+  // ──────────────────────────────────────────────────────────────────────────
 
   // dedupe by code within each list, then sort by code number
   const codeNum = (c) => num(c) ?? 0;
