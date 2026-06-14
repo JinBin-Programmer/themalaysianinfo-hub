@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import MalaysiaMap from "./MalaysiaMap";
+import SeatList from "./SeatList";
 import ElectionArticle from "./ElectionArticle";
 import AdBanner from "@/components/AdBanner";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -83,6 +84,7 @@ function StatePanel({ s }: { s: StateInfo }) {
   const tx = t[lang];
   const name = lang === "bm" ? s.nameBm : s.nameEn;
   const note = lang === "bm" ? s.noteBm : s.noteEn;
+  const status = lang === "bm" ? s.statusBm : s.statusEn;
 
   return (
     <div className="space-y-4">
@@ -93,6 +95,12 @@ function StatePanel({ s }: { s: StateInfo }) {
         />
         <h3 className="text-2xl font-black text-white">{name}</h3>
       </div>
+
+      {status && (
+        <div className="rounded-xl bg-amber-500/10 border border-amber-400/25 p-3 text-xs text-amber-200/90 leading-relaxed">
+          ⚠️ {status}
+        </div>
+      )}
 
       {s.isFT ? (
         <p className="text-sm text-white/60 leading-relaxed">{note}</p>
@@ -140,6 +148,14 @@ function StatePanel({ s }: { s: StateInfo }) {
       {note && !s.isFT && (
         <p className="text-xs text-white/45 leading-relaxed">💡 {note}</p>
       )}
+
+      {/* Per-constituency winners (Parliament + DUN) */}
+      <div className="pt-1">
+        <div className="text-white/45 text-[11px] uppercase tracking-wider mb-2">
+          {lang === "bm" ? "Pemenang setiap kawasan" : "Winner by constituency"}
+        </div>
+        <SeatList stateId={s.id} />
+      </div>
     </div>
   );
 }
