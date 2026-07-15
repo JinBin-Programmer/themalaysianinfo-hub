@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { GUIDES } from "./(site)/panduan/_lib/registry";
 
 const BASE = "https://www.themalaysianinfo.online";
 
@@ -17,10 +18,22 @@ const ROUTES = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return ROUTES.map((path) => ({
+  const toolRoutes: MetadataRoute.Sitemap = ROUTES.map((path) => ({
     url: path ? `${BASE}/${path}` : BASE,
     lastModified: now,
     changeFrequency: path === "" || path === "petrol" || path === "pepper" ? "daily" : "weekly",
     priority: path === "" ? 1 : 0.7,
   }));
+
+  const guideRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE}/panduan`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    ...GUIDES.map((g) => ({
+      url: `${BASE}/panduan/${g.slug}`,
+      lastModified: new Date(g.updated),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  ];
+
+  return [...toolRoutes, ...guideRoutes];
 }

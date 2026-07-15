@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import type { GuideCard } from "@/app/(site)/panduan/_lib/types";
 
 type Lang = "bm" | "en";
 type CategoryId = "all" | "prices" | "finance" | "calculator" | "lookup" | "weather" | "tools";
@@ -51,7 +52,7 @@ const TOOLS: Tool[] = [
   { id: "ic",      icon: "🪪", name: "Semak IC",           nameEn: "IC Checker",          desc: "Semak tarikh lahir, negeri & jantina dari nombor IC",    descEn: "Check birthdate, state & gender from IC number",        url: "/semak-ic",            category: "lookup", internal: true  },
   { id: "cuti",    icon: "📅", name: "Cuti Umum",          nameEn: "Public Holidays",     desc: "Kalendar cuti umum Malaysia mengikut negeri",            descEn: "Malaysia public holidays calendar by state",            url: "/cuti-umum",          category: "lookup",   badge: "2026", badgeEn: "2026", internal: true },
   { id: "pru",     icon: "🗳️", name: "Pilihan Raya",       nameEn: "Elections",           desc: "Keputusan PRU15 & kerajaan setiap negeri — peta interaktif", descEn: "GE15 results & each state's government — interactive map", url: "/pilihanraya",        category: "lookup",   badge: "PRU15", badgeEn: "GE15", hot: true, internal: true },
-  { id: "4d",      icon: "🎰", name: "Keputusan 4D",       nameEn: "4D Results",          desc: "Semak keputusan loteri 4D Magnum, Toto & Damacai",      descEn: "Check Magnum, Toto & Damacai 4D lottery results",       url: "/4d",            category: "lookup",   hot: true, internal: true  },
+  { id: "4d",      icon: "🎰", name: "Jadual Cabutan 4D",  nameEn: "4D Draw Schedule",    desc: "Jadual cabutan & pautan keputusan rasmi Magnum, Toto & Damacai", descEn: "Draw schedule & official results links for Magnum, Toto & Damacai", url: "/4d",            category: "lookup",   hot: true, internal: true  },
 
   // ── Solat ──
   { id: "solat",   icon: "🌙", name: "Waktu Solat",        nameEn: "Prayer Times",        desc: "Jadual waktu solat harian seluruh Malaysia",             descEn: "Daily prayer times schedule across Malaysia",           url: "/solat",                     category: "weather",  hot: true, internal: true  },
@@ -220,7 +221,7 @@ function CategorySection({ categoryId, tools, lang, favorites, onToggleFav }: {
 }
 
 /* ── Main Component ── */
-export default function HubContent() {
+export default function HubContent({ guides = [] }: { guides?: GuideCard[] }) {
   const [lang, setLang]         = useState<Lang>("bm");
   const [query, setQuery]       = useState("");
   const [activeTab, setActiveTab] = useState<CategoryId>("all");
@@ -317,6 +318,12 @@ export default function HubContent() {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/panduan"
+              className="hidden sm:inline-flex text-sm font-medium text-white/55 hover:text-white transition-colors"
+            >
+              {lang === "bm" ? "Panduan" : "Guides"}
+            </Link>
             <button onClick={() => searchRef.current?.focus()} className="sm:hidden p-2 rounded-lg bg-white/8 hover:bg-white/12 text-white/60 transition-colors" aria-label="Search">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
@@ -492,6 +499,52 @@ export default function HubContent() {
             ))
           )}
         </div>
+
+        {/* ── Guides Section ── */}
+        {guides.length > 0 && (
+          <div className="border-t border-white/[0.06]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xl">📚</span>
+                <h2 className="text-lg font-bold text-red-400">
+                  {lang === "bm" ? "Panduan & Artikel" : "Guides & Articles"}
+                </h2>
+                <div className="flex-1 h-px bg-white/[0.06]" />
+                <Link href="/panduan" className="text-sm text-white/45 hover:text-white/80 transition-colors shrink-0">
+                  {lang === "bm" ? "Lihat semua →" : "View all →"}
+                </Link>
+              </div>
+              <p className="text-white/40 text-sm mb-6">
+                {lang === "bm"
+                  ? "Panduan langkah demi langkah tentang KWSP, cukai, roadtax, zakat dan kewangan — disemak berkala dengan rujukan sumber rasmi."
+                  : "Step-by-step guides on EPF, tax, road tax, zakat and personal finance — regularly reviewed against official sources."}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {guides.slice(0, 6).map((g) => (
+                  <Link
+                    key={g.slug}
+                    href={`/panduan/${g.slug}`}
+                    className="tool-card group flex flex-col gap-3 bg-gradient-to-br from-red-500/10 to-rose-700/10 border border-white/10 hover:border-red-500/40 rounded-2xl p-5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="w-10 h-10 rounded-xl bg-black/30 flex items-center justify-center text-xl shrink-0">{g.icon}</span>
+                      <span className="text-[10px] font-bold tracking-widest uppercase text-red-300 bg-red-500/20 px-2 py-0.5 rounded-full">
+                        {lang === "bm" ? g.category : g.categoryEn}
+                      </span>
+                    </div>
+                    <div className="font-bold text-white text-[15px] leading-snug flex-1">
+                      {lang === "bm" ? g.title : g.titleEn}
+                    </div>
+                    <div className="flex items-center justify-between pt-1 border-t border-white/[0.06] text-[11px] text-white/35">
+                      <span>{g.readMins} {lang === "bm" ? "min bacaan" : "min read"}</span>
+                      <span className="text-white/25 group-hover:text-white/60 transition-colors text-base font-light">→</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── CTA Banner ── */}
         <div className="border-t border-white/[0.06] bg-gradient-to-b from-transparent to-black/30">

@@ -48,10 +48,32 @@ export default function AboutPage() {
       {SECTIONS.map((s) => (
         <section key={s.h} className="card-glass rounded-2xl p-6 space-y-3">
           <h2 className="text-lg font-bold text-red-400">{s.h} <span className="text-white/30 font-normal text-sm">/ {s.hEn}</span></h2>
-          <p className="text-sm text-white/70 leading-relaxed">{s.p}</p>
-          <p className="text-sm text-white/45 leading-relaxed">{s.pEn}</p>
+          <p className="text-[15px] text-white/80 leading-relaxed">{s.p}</p>
+          <p className="text-[15px] text-white/55 leading-relaxed">{s.pEn}</p>
         </section>
       ))}
+
+      <section className="card-glass rounded-2xl p-6 space-y-3">
+        <h2 className="text-lg font-bold text-red-400">
+          Proses editorial kami <span className="text-white/30 font-normal text-sm">/ Our editorial process</span>
+        </h2>
+        <p className="text-[15px] text-white/80 leading-relaxed">
+          Setiap alatan dan artikel panduan di laman ini disediakan dan disemak oleh pasukan editorial
+          The Malaysian Info. Kami merujuk sumber rasmi — antaranya KWSP, LHDN, JPJ, PERKESO, PTPTN dan
+          data.gov.my — dan mencatatkan tarikh kemas kini terakhir pada setiap artikel panduan. Apabila
+          kadar atau dasar rasmi berubah, kami mengemas kini kandungan berkaitan secepat mungkin. Jika
+          anda menemui maklumat yang lapuk atau tidak tepat, sila maklumkan kepada kami melalui halaman
+          Hubungi — pembetulan akan dibuat selepas semakan.
+        </p>
+        <p className="text-[15px] text-white/55 leading-relaxed">
+          Every tool and guide on this site is prepared and reviewed by The Malaysian Info editorial
+          team. We reference official sources — including KWSP, LHDN, JPJ, PERKESO, PTPTN and
+          data.gov.my — and each guide displays its last-reviewed date. When official rates or policies
+          change, we update the affected content as quickly as possible. If you spot outdated or
+          inaccurate information, please let us know via the Contact page and we will correct it after
+          verification.
+        </p>
+      </section>
 
       <div className="text-center pt-2">
         <Link href="/" className="text-red-400 hover:underline text-sm">← Kembali ke semua alatan / Back to all tools</Link>

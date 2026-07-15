@@ -16,6 +16,8 @@ export default function SiteFooter() {
       <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-white/40">
         <Link href="/" className="hover:text-white/70 transition-colors">{lang === "bm" ? "Laman Utama" : "Home"}</Link>
         <span className="text-white/15">·</span>
+        <Link href="/panduan" className="hover:text-white/70 transition-colors">{lang === "bm" ? "Panduan" : "Guides"}</Link>
+        <span className="text-white/15">·</span>
         <Link href="/about" className="hover:text-white/70 transition-colors">{lang === "bm" ? "Tentang" : "About"}</Link>
         <span className="text-white/15">·</span>
         <Link href="/contact" className="hover:text-white/70 transition-colors">{lang === "bm" ? "Hubungi" : "Contact"}</Link>

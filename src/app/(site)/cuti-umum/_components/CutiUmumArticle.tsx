@@ -37,7 +37,7 @@ export default function CutiUmumArticle() {
       <article className="card-glass rounded-2xl p-6 space-y-4">
         <h2 className="text-xl font-bold text-white">{c.title}</h2>
         {c.paras.map((p, i) => (
-          <p key={i} className="text-sm text-white/65 leading-relaxed">{p}</p>
+          <p key={i} className="text-[15px] text-white/80 leading-relaxed">{p}</p>
         ))}
       </article>
 
@@ -52,7 +52,7 @@ export default function CutiUmumArticle() {
                 <span>{lang === "bm" ? f.q : f.qEn}</span>
                 <span className="text-yellow-400 transition-transform group-open:rotate-45 shrink-0">+</span>
               </summary>
-              <p className="text-sm text-white/55 leading-relaxed mt-2">
+              <p className="text-[15px] text-white/75 leading-relaxed mt-2">
                 {lang === "bm" ? f.a : f.aEn}
               </p>
             </details>

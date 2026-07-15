@@ -28,6 +28,12 @@ export default function SiteNav() {
           >
             {lang === "bm" ? "Semua Alatan" : "All Tools"}
           </Link>
+          <Link
+            href="/panduan"
+            className="hidden sm:inline-flex text-sm font-medium text-white/55 hover:text-white transition-colors"
+          >
+            {lang === "bm" ? "Panduan" : "Guides"}
+          </Link>
           <LanguageToggle />
         </div>
       </div>
