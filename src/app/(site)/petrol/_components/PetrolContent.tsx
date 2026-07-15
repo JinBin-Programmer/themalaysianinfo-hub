@@ -203,7 +203,7 @@ export default function PetrolContent({ data }: Props) {
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-6 bg-[#0a0a0a]">
 
         <div className="animate-in delay-2">
-          <PriceHistory currentFuels={data.fuels} />
+          <PriceHistory currentFuels={data.fuels} history={data.history} />
         </div>
 
         <AdBanner slot="6666666666" format="horizontal" className="min-h-[90px] rounded-xl overflow-hidden" />

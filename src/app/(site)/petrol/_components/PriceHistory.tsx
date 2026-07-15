@@ -1,11 +1,12 @@
 "use client";
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import history from "../_data/price-history.json";
-import type { FuelPrice } from "../_lib/petrol";
+import fallbackHistory from "../_data/price-history.json";
+import type { FuelPrice, HistoryRow } from "../_lib/petrol";
 
 interface Props {
   currentFuels: FuelPrice[];
+  history?: HistoryRow[];
 }
 
 function fmt(n: number) { return n.toFixed(2); }
@@ -26,8 +27,11 @@ function ron95Market(ron97: number) {
   return parseFloat((ron97 * 0.92).toFixed(2));
 }
 
-export default function PriceHistory({ currentFuels }: Props) {
+export default function PriceHistory({ currentFuels, history: liveHistory }: Props) {
   const { lang } = useLanguage();
+
+  const history: HistoryRow[] =
+    liveHistory && liveHistory.length > 0 ? liveHistory : fallbackHistory;
 
   const ron95  = currentFuels.find(f => f.code === "RON95");
   const ron97  = currentFuels.find(f => f.code === "RON97");

@@ -4,6 +4,7 @@ import { useState } from "react";
 import MalaysiaMap from "./MalaysiaMap";
 import SeatList from "./SeatList";
 import UpcomingElection from "./UpcomingElection";
+import SeatsToWatch from "./SeatsToWatch";
 import ElectionArticle from "./ElectionArticle";
 import AdBanner from "@/components/AdBanner";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -218,6 +219,9 @@ export default function ElectionContent() {
 
         {/* Upcoming elections (Johor 11 Jul, N. Sembilan 1 Aug 2026) */}
         <UpcomingElection onSelectState={setSelectedId} />
+
+        {/* Marginal "seats to watch" for the upcoming elections */}
+        <SeatsToWatch />
 
         {/* Key people */}
         <section className="animate-in space-y-3">

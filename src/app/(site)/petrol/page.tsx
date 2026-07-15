@@ -3,7 +3,7 @@ import { getPetrolData } from "./_lib/petrol";
 import PetrolContent from "./_components/PetrolContent";
 import { PETROL_FAQ } from "./_lib/faq";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Harga Petrol Malaysia Minggu Ini — RON95 RON97 Diesel",

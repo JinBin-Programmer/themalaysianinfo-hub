@@ -3,26 +3,26 @@ import FourDContent from "./_components/FourDContent";
 import { FAQ } from "./_lib/faq";
 
 export const metadata: Metadata = {
-  title: "Keputusan 4D Malaysia Hari Ini — Magnum TOTO Da Ma Cai",
+  title: "Jadual Cabutan 4D Malaysia — Magnum TOTO Da Ma Cai",
   description:
-    "Keputusan 4D terkini Malaysia. Magnum 4D, Sports TOTO, Da Ma Cai — hadiah pertama, kedua, ketiga, khas dan saguhati. Semak nombor anda dengan penyemak 4D.",
+    "Jadual cabutan 4D Malaysia — hari cabutan Rabu, Sabtu & Ahad, keputusan dari 7 malam. Pautan terus ke keputusan rasmi Magnum 4D, Sports TOTO dan Da Ma Cai.",
   keywords: [
+    "jadual cabutan 4d",
+    "hari cabutan 4d",
     "keputusan 4d",
-    "4d result malaysia",
     "magnum 4d",
     "sports toto result",
     "da ma cai result",
-    "keputusan 4d hari ini",
     "4d malaysia",
-    "semak nombor 4d",
+    "pukul berapa keputusan 4d",
   ],
   alternates: { canonical: "/4d" },
   openGraph: {
     type: "website",
     locale: "ms_MY",
-    title: "Keputusan 4D Malaysia Hari Ini — Magnum TOTO Da Ma Cai",
+    title: "Jadual Cabutan 4D Malaysia — Magnum TOTO Da Ma Cai",
     description:
-      "Keputusan 4D terkini Malaysia — Magnum 4D, Sports TOTO dan Da Ma Cai, dengan penyemak nombor.",
+      "Hari cabutan 4D Malaysia dan pautan terus ke keputusan rasmi Magnum 4D, Sports TOTO dan Da Ma Cai.",
   },
 };
 
