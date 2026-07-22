@@ -59,6 +59,12 @@ export default function CukaiPendapatanArticle() {
           ))}
         </div>
       </div>
+
+      <p className="text-center text-xs text-white/25">
+        {lang === "bm" ? "Rujukan kadar cukai" : "Tax rate reference"}:{" "}
+        <a href="https://www.hasil.gov.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">hasil.gov.my</a>
+        {" "}(LHDN)
+      </p>
     </div>
   );
 }

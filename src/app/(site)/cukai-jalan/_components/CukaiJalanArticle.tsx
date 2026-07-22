@@ -59,6 +59,11 @@ export default function CukaiJalanArticle() {
           ))}
         </div>
       </div>
+
+      <p className="text-center text-xs text-white/25">
+        {lang === "bm" ? "Rujukan kadar cukai jalan" : "Road tax rate reference"}:{" "}
+        <a href="https://www.jpj.gov.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">jpj.gov.my</a>
+      </p>
     </div>
   );
 }

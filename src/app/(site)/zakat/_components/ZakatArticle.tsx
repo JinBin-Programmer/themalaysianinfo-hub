@@ -59,6 +59,12 @@ export default function ZakatArticle() {
           ))}
         </div>
       </div>
+
+      <p className="text-center text-xs text-white/25">
+        {lang === "bm" ? "Rujukan nisab & kadar" : "Nisab & rate reference"}:{" "}
+        <a href="https://www.zakat.com.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">zakat.com.my</a>
+        {" "}(PPZ-MAIWP) — {lang === "bm" ? "semak majlis agama negeri anda untuk nilai rasmi" : "check your state religious council for the official figure"}
+      </p>
     </div>
   );
 }

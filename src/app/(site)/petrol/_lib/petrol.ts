@@ -100,7 +100,12 @@ const CACHE_TTL_MS = 60 * 60 * 1000;
 
 async function fetchFromDataGov(): Promise<{ fuels: FuelPrice[]; history: HistoryRow[]; date: string } | null> {
   try {
-    const res = await fetch(DATA_GOV_URL, { cache: "no-store" });
+    // Was `cache: "no-store"`, relying on the page's `revalidate = 3600` for
+    // caching. Once the whole app went to per-request dynamic rendering (for
+    // the ?lang=en locale support), that page-level revalidate stopped having
+    // any effect, so caching now has to live on the fetch itself or this
+    // would hit the upstream API on every single page view.
+    const res = await fetch(DATA_GOV_URL, { next: { revalidate: 3600 } });
     if (!res.ok) return null;
 
     const raw: {

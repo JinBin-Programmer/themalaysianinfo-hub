@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
-import { LanguageProvider } from "@/contexts/LanguageContext";
+import { headers } from "next/headers";
+import { LanguageProvider, type Lang } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.themalaysianinfo.online"),
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     "portal maklumat malaysia",
     "malaysia information hub",
     "harga petrol malaysia",
-    "harga emas malaysia",
+    "harga lada malaysia",
     "kalkulator malaysia",
     "waktu solat malaysia",
     "kwsp calculator",
@@ -40,11 +41,17 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": "ca-pub-7019273666606982",
   },
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in the deployment env once you add
+  // this property in Google Search Console (Settings > Ownership verification > HTML tag)
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  }),
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale: Lang = (await headers()).get("x-locale") === "en" ? "en" : "bm";
   return (
-    <html lang="ms">
+    <html lang={locale === "en" ? "en" : "ms"}>
       <head>
         {/* Google AdSense */}
         <Script
@@ -88,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#0a0a0a]">
-        <LanguageProvider>
+        <LanguageProvider initialLang={locale}>
           <main className="flex-1">
             {children}
           </main>

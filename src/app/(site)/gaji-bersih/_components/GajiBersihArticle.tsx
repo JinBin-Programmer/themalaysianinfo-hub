@@ -59,6 +59,16 @@ export default function GajiBersihArticle() {
           ))}
         </div>
       </div>
+
+      <p className="text-center text-xs text-white/25">
+        {lang === "bm" ? "Rujukan kadar caruman" : "Contribution rate reference"}:{" "}
+        <a href="https://www.kwsp.gov.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">kwsp.gov.my</a>
+        {" · "}
+        <a href="https://www.perkeso.gov.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">perkeso.gov.my</a>
+        {" · "}
+        <a href="https://www.hasil.gov.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">hasil.gov.my</a>
+        {" ("}{lang === "bm" ? "Jadual PCB" : "PCB schedule"}{")"}
+      </p>
     </div>
   );
 }

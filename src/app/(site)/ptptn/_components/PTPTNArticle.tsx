@@ -59,6 +59,11 @@ export default function PTPTNArticle() {
           ))}
         </div>
       </div>
+
+      <p className="text-center text-xs text-white/25">
+        {lang === "bm" ? "Rujukan rasmi" : "Official reference"}:{" "}
+        <a href="https://www.ptptn.gov.my" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50">ptptn.gov.my</a>
+      </p>
     </div>
   );
 }
